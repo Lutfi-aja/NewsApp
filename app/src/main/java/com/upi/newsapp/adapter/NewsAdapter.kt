@@ -1,11 +1,13 @@
 package com.upi.newsapp.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.upi.newsapp.DetailActivity
 import com.upi.newsapp.data.News
 import com.upi.newsapp.R
 
@@ -30,6 +32,12 @@ class NewsAdapter(private val listNews: ArrayList<News>) : RecyclerView.Adapter<
             tvDate.text = listNews[position].date
             tvTime.text = listNews[position].time
             imgNews.setImageResource(listNews[position].image)
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_NEWS_DATA, listNews[position])
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
